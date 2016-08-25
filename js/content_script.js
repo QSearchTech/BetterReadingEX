@@ -8,7 +8,10 @@ function seg(p_dom){
     var p_style_color = $(p_dom).css("color").toString();
     var p_style_font_weight = $(p_dom).css("font-weight").toString();
     var p_style_font_size = $(p_dom).css("font-size").toString();
-    if (text.length <= 20) return;
+    if (text.length <= 20) {
+        $("body").dequeue("seg");
+        return;
+    }
 
     $.get("https://machinelearning-lab.appspot.com/trendapi/api_ml_chsg_predict_push",{"message":text }).success(function(resp){
         $(p_dom).html(resp);
@@ -17,11 +20,24 @@ function seg(p_dom){
             this.style.setProperty("font-weight", p_style_font_weight, "important");
             this.style.setProperty("font-size", p_style_font_size, "important");
         });
+
+
+        $("body").dequeue("seg");
     },"text")
 };
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResp) {
     $.map($("p"),function(elem){
-        seg(elem);
+        $("body").queue("seg", function(){
+            seg(elem)
+        })
     });
+    var queue_size = $("body").queue("seg").length;
+    console.log("queue_size",queue_size);
+    for (var x=0; x< Math.min(queue_size,1);x++){
+        $("body").dequeue("seg");
+    }
+
+
+
 })
