@@ -45,7 +45,7 @@ function genericOnClick(info, tab) {
 }
 
 // Create a context menu button
-var title = "QSearch Chinese Segmentation";
+var title = "BetterReadingEX";
 var id = chrome.contextMenus.create({"title": title, "contexts":["page"],
     "onclick": genericOnClick});
 console.log("'page' item:" + id);
