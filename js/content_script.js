@@ -13,7 +13,7 @@ function seg(p_dom){
         return;
     }
 
-    $.get("https://machinelearning-lab.appspot.com/trendapi/api_ml_chsg_predict_push",{"message":text }).success(function(resp){
+    $.post("https://machinelearning-lab.appspot.com/trendapi/api_ml_chsg_predict_push",{"message":text }).success(function(resp){
         $(p_dom).html(resp);
         $(p_dom).find("span").each(function(){
         	this.style.setProperty("color", p_style_color, "important");

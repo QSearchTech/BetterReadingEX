@@ -1,7 +1,7 @@
 {
     "name": "BetterReadingEX",
     "description": "Better Chinese Article Reading Experience powered by QSearch Tech",
-    "version": "0.1",
+    "version": "0.1.4",
     "permissions": [
         "contextMenus","activeTab"
     ],
